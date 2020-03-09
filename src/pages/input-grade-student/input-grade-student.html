@@ -1,0 +1,165 @@
+<ion-header>
+  <ion-navbar color="pallete-yellow">
+    <ion-title>{{ (items_siswadetail | async)?.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="backgrounds">
+    <div padding>
+        <ion-segment [(ngModel)]="param_segment_nilai">
+          <ion-segment-button value="nilai">
+            Nilai Siswa
+          </ion-segment-button>
+          <ion-segment-button value="absen">
+            Absensi
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      
+      <div [ngSwitch]="param_segment_nilai">
+        <ion-list *ngSwitchCase="'absen'">
+         
+              <ion-item *ngFor="let item of arrayslog" >
+                  <span>{{ item.tgl }}</span>  {{item.absen}}
+                  <button ion-button outline item-end icon-start>
+                      <ion-icon color="{{ item.absen == 'HADIR' ? 'secondary':'danger' }}" name="{{ item.absen == 'HADIR' ? 'thumbs-up':'thumbs-down' }}"></ion-icon>
+                    </button>
+              </ion-item>
+
+        </ion-list>
+      
+        <ion-list *ngSwitchCase="'nilai'">
+            <ion-card>
+                <ion-card-header>
+                  <ion-item>
+                    <ion-avatar item-start>
+                        <img src="https://cdn1.iconfinder.com/data/icons/flat-character-color-1/60/flat-design-character_1-512.png">
+                      </ion-avatar>
+                    <h2> {{ (items_siswadetail | async)?.name }} </h2>
+                    <p> {{ (items_siswadetail | async)?.kelas }} </p>
+                  </ion-item>
+                </ion-card-header>
+                <hr>
+                <ion-card-content>
+                  <ion-item>
+                    <ion-label floating>Nilai Harian 1</ion-label>
+                    <ion-input type="number" [(ngModel)]="h1"> </ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label floating>Nilai Harian 2</ion-label>
+                    <ion-input type="number" [(ngModel)]="h2"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label floating>Nilai Harian 3</ion-label>
+                    <ion-input type="number" [(ngModel)]="h3"></ion-input>
+                  </ion-item>
+                  <!-- <ion-item>
+                    <ion-label floating >Nilai Absen</ion-label>
+                    <ion-input type="number" (click)="detil()" [(ngModel)]="absn" readonly></ion-input>
+                  </ion-item> -->
+                  <ion-item>
+                    <ion-label floating>Nilai Ujian Tengah Semester</ion-label>
+                    <ion-input type="number" [(ngModel)]="uts"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label floating>Nilai Ujian Akhir Semester</ion-label>
+                    <ion-input type="number" [(ngModel)]="uas"></ion-input>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+
+              <ion-card>
+           
+                <hr>
+                  <ion-card-header style="text-align:center;" class="header-cardd">
+                    Absensi
+                  </ion-card-header>
+                
+                  <ion-list>
+    
+                    <button ion-item>
+                        <ion-icon color="secondary" name="checkmark-circle" item-start></ion-icon>
+                        <ion-label class="font-items" fixed>Hadir</ion-label>
+                        <ion-input class="font-items" type="text" [(ngModel)]="TypeAbsen.hadir.length" disabled></ion-input>
+                    </button>
+    
+                    <button ion-item>
+                      <ion-icon color="pallete-orange" name="alert" item-start></ion-icon>
+                      <ion-label class="font-items" fixed>Izin</ion-label>
+                      <ion-input class="font-items" type="text" [(ngModel)]="TypeAbsen.izin.length" disabled></ion-input>
+                    </button>
+                
+                    <button ion-item>
+                      <ion-icon color="pallete-orange" name="medkit" item-start></ion-icon>
+                      <ion-label class="font-items" fixed>Sakit</ion-label>
+                      <ion-input class="font-items" type="text" [(ngModel)]="TypeAbsen.sakit.length" disabled></ion-input>
+                    </button>
+                
+                    <button ion-item>
+                      <ion-icon color="danger" name="close" item-start></ion-icon>
+                      <ion-label class="font-items" fixed>Alfa</ion-label>
+                      <ion-input class="font-items" type="text" [(ngModel)]="TypeAbsen.alfa.length" disabled></ion-input><span> %</span>
+                    </button>
+    
+                
+                  </ion-list>
+              </ion-card>
+
+              <ion-card>
+           
+                <hr>
+                  <ion-card-header style="text-align: center;" class="header-cardd">
+                    Presentase Nilai (%)
+                  </ion-card-header>
+                
+                  <ion-list>
+  
+                    <button ion-item>
+                        <ion-icon color="{{ absens > 8 ? 'secondary' : absens < 5 ? 'danger':'pallete-orange' }}" name="{{ absens > 6 ? 'thumbs-up':'thumbs-down' }}" item-start></ion-icon>
+                        <ion-label class="font-items" fixed>Absen</ion-label>
+                        <ion-input class="font-items" type="text" [(ngModel)]="absens" disabled></ion-input>
+                    </button>
+  
+                    <button ion-item>
+                      <ion-icon color="{{ harians > 14 ? 'secondary' : harians < 10 ? 'danger':'pallete-orange' }}" name="{{ harians > 14 ? 'thumbs-up':'thumbs-down' }}" item-start></ion-icon>
+                      <ion-label class="font-items" fixed>Harian</ion-label>
+                      <ion-input class="font-items" type="text" [(ngModel)]="harians" disabled></ion-input>
+                    </button>
+                
+                    <button ion-item>
+                      <ion-icon color="{{ utsEnd > 15 ? 'secondary' : utsEnd < 10 ? 'danger':'pallete-orange' }}" name="{{ utsEnd > 15 ? 'thumbs-up':'thumbs-down' }}" item-start></ion-icon>
+                      <ion-label class="font-items" fixed>UTS</ion-label>
+                      <ion-input class="font-items" type="text" [(ngModel)]="utsEnd" disabled></ion-input>
+                    </button>
+                
+                    <button ion-item>
+                      <ion-icon color="{{ uasEnd > 20 ? 'secondary' : uasEnd < 15 ? 'danger':'pallete-orange' }}" name="{{ uasEnd > 20 ? 'thumbs-up':'thumbs-down' }}" item-start></ion-icon>
+                      <ion-label class="font-items" fixed>UAS</ion-label>
+                      <ion-input class="font-items" type="text" [(ngModel)]="uasEnd" disabled></ion-input><span> %</span>
+                    </button>
+  
+                    <button ion-item>
+                        <ion-icon color="{{ TotalEnd > 78 ? 'secondary' : TotalEnd < 60 ? 'danger':'pallete-orange' }}" name="{{ TotalEnd > 78 ? 'thumbs-up':'thumbs-down' }}" item-start></ion-icon>
+                        <ion-label class="font-items" fixed>Total</ion-label>
+                        <ion-input class="font-items" type="text" [(ngModel)]="TotalEnd" disabled></ion-input><span> %</span>
+                    </button>
+  
+                    <hr style="border:solid gray 1px;">
+                    <div padding>
+                      <p style="font-size:10px">* Absen 10%</p>
+                      <p style="font-size:10px">* Harian 20%</p>
+                      <p style="font-size:10px">* UTS 30%</p>
+                      <p style="font-size:10px">* UAS 40%</p>
+                    </div>
+                
+                  </ion-list>
+              </ion-card>
+
+        </ion-list>
+      </div>
+
+ 
+
+ 
+
+</ion-content>

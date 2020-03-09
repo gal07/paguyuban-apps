@@ -1,0 +1,29 @@
+<ion-header style="display: none">
+        <ion-navbar>
+          <ion-title>Profile</ion-title>
+        </ion-navbar>
+</ion-header>
+<ion-content>
+      <!-- refresher -->
+      <ion-refresher slot="fixed" (ionRefresh)="refreshPage()">
+            <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <div padding class="card-background-page backgrounds">
+
+      <h3 class="center"> Mata Pelajaran </h3>
+
+      <div *ngFor="let item of mapel">
+  
+            <ion-card (click)="goTo(item)">
+                <img src='https://groundviews.org/wp-content/uploads/2015/06/Open-Book.jpg?w=640'/>
+                <div class="card-title">{{ item }}</div>
+                <div class="card-subtitle">{{ item }}</div>
+            </ion-card>
+  
+      </div>
+
+    </div>
+
+
+</ion-content>

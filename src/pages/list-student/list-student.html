@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar color="pallete-yellow">
+    <ion-title>{{ getKodeMapel }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="backgrounds">
+  <!-- <ion-list>
+    <ion-item *ngFor="let item of getsiswa" >
+      <ion-avatar item-start>
+        <img src="https://cdn1.iconfinder.com/data/icons/flat-character-color-1/60/flat-design-character_1-512.png">
+      </ion-avatar>
+      <h2>{{item.name}}</h2>
+      <small>{{ item.id }}</small>
+      <ion-icon item-end name="arrow-dropright-circle" (click)="goDetail(item.key)"></ion-icon>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-list>
+      <ion-item-sliding *ngFor="let item of getsiswa">
+        <ion-item (click)="presentActionSheet(item.name,item.key,getKodeMapel)">
+          <ion-avatar item-start>
+              <img src='https://groundviews.org/wp-content/uploads/2015/06/Open-Book.jpg?w=640'/>
+          </ion-avatar>
+          <ion-icon name="arrow-dropleft" item-end></ion-icon>
+          <h2>{{item.name}}</h2>
+        <small>{{ item.id }}</small>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="pallete-green" (click)="goDetail(item.key)">
+            <ion-icon name="create"></ion-icon>
+            Nilai
+          </button>
+          <!-- <button ion-button color="pallete-blue" (click)="Absen(item.name,item.key,getKodeMapel)" >
+            <ion-icon name="clipboard"></ion-icon>
+            Absen
+          </button> -->
+          <button ion-button color="pallete-yellow" (click)="infoDetail(item.id)" >
+            <ion-icon name="person"></ion-icon>
+            Info Detail
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+</ion-content>

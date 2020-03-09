@@ -1,0 +1,20 @@
+export interface Siswa {
+    nisn:string,
+    name:string,
+    tgl_lahir:string,
+    tempat_lahir:string,
+    asal_sekolah:string,
+    alamat:string,
+    email:string,
+    orangtua:object,
+    role:string,
+    nama_wali:string,
+    pekerjaan_wali:string,
+    penghasilan_wali:string,
+    alamat_wali:string,
+    telp_wali:number,
+    email_wali:string,
+    orangtua_uid:string,
+    uid:string,
+    used:boolean;
+}
