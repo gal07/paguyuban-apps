@@ -36,6 +36,15 @@ export const firebaseConfig = {
   storageBucket: "fir-crud-7f287.appspot.com",
   messagingSenderId: "148921659125"
 };
+
+// apiKey: "AIzaSyDLRvuEOocPLvPN1fm28Vz4UNEmDjNBRyw",
+// authDomain: "paguyuban-52264.firebaseapp.com",
+// databaseURL: "https://paguyuban-52264.firebaseio.com",
+// projectId: "paguyuban-52264",
+// storageBucket: "paguyuban-52264.appspot.com",
+// messagingSenderId: "1010994715756",
+// appId: "1:1010994715756:web:f296ffca4cd0036cf9cc49",
+// measurementId: "G-1KVGXFE1B8"
 @NgModule({
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
