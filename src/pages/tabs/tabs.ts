@@ -1,3 +1,5 @@
+import { HomePage } from './../home/home';
+import { ListMemberPage } from './../list-member/list-member';
 import { Component } from '@angular/core';
 import { IndexGuruPage } from './../index-guru/index-guru';
 import { IndexOrangtuaPage } from './../index-orangtua/index-orangtua';
@@ -19,20 +21,20 @@ export class TabsPage {
    */
 
   constructor( public params: NavParams ) {
-    let roles = this.params.get('data');
+    //let roles = this.params.get('data');
     /* Guru */
-    if (roles.role == 1) {
-    this.tab1Root = IndexGuruPage
-    this.tab2Root = UsersPage
+    //if (roles.role == 1) {
+    this.tab1Root = HomePage
+    this.tab2Root = ListMemberPage
     /* siswa */
-    }else if(roles.role == 2){
-    this.tab1Root = IndexSiswaPage
-    this.tab2Root = UsersPage
+    // }else if(roles.role == 2){
+    // this.tab1Root = IndexSiswaPage
+    // this.tab2Root = UsersPage
     /* Orangtua */
-    }else if(roles.role == 3){
-    this.tab1Root = IndexOrangtuaPage
-    this.tab2Root = UsersPage
-    }
+    // }else if(roles.role == 3){
+    // this.tab1Root = IndexOrangtuaPage
+    // this.tab2Root = UsersPage
+    // }
 
   }
 }

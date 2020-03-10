@@ -1,7 +1,7 @@
 import { GuruserviceProvider } from './../guruservice/guruservice';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlertController, LoadingController } from 'ionic-angular';
+import { AlertController, LoadingController,ToastController } from 'ionic-angular';
 import { getLocaleMonthNames } from '@angular/common';
 
 
@@ -20,6 +20,7 @@ export class AlertProvider {
     public alertController: AlertController,
     private guruserv :GuruserviceProvider,
     public loadingCtrl: LoadingController,
+    public toastctrl:ToastController
     ) {
     console.log('Hello AlertProvider Provider');
   }
@@ -175,6 +176,33 @@ export class AlertProvider {
       }
     });
     alert.present();
+  }
+
+  /* membuat pesan */
+  presentToast(msg,dur,position) {
+    let toast = this.toastctrl.create({
+      message: msg,
+      duration: dur,
+      position:position
+    });
+    toast.present();
+  }
+
+  /**
+   * Loading Controller
+   */
+  presentLoader(on){
+     /* Create Loader */
+     const loader = this.loadingCtrl.create({
+      content: "Waiting , Update Absensi",
+    });
+
+    if (on == 1) {
+      loader.present()
+    }else if(on == 2){
+      loader.dismiss()
+    }
+
   }
 
 }

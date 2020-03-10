@@ -28,23 +28,34 @@ import { AlertProvider } from '../providers/alert/alert';
 import { GuruserviceProvider } from '../providers/guruservice/guruservice';
 import { SiswaserviceProvider } from '../providers/siswaservice/siswaservice';
 
+/* Paguyuban Apps */
+
+import { ListMemberPage } from './../pages/list-member/list-member';
+import { DetailMemberPage } from './../pages/detail-member/detail-member';
+import { AddMemberPage } from './../pages/add-member/add-member';
+import { PaguyubanServiceProvider } from '../providers/paguyuban-service/paguyuban-service';
+
 export const firebaseConfig = {
-  apiKey: "AIzaSyC7Hi9Ft_K0MmOdbP6tsg5YksP4F6nORHE",
-  authDomain: "fir-crud-7f287.firebaseapp.com",
-  databaseURL: "https://fir-crud-7f287.firebaseio.com",
-  projectId: "fir-crud-7f287",
-  storageBucket: "fir-crud-7f287.appspot.com",
-  messagingSenderId: "148921659125"
+
+  apiKey: "AIzaSyDLRvuEOocPLvPN1fm28Vz4UNEmDjNBRyw",
+  authDomain: "paguyuban-52264.firebaseapp.com",
+  databaseURL: "https://paguyuban-52264.firebaseio.com",
+  projectId: "paguyuban-52264",
+  storageBucket: "paguyuban-52264.appspot.com",
+  messagingSenderId: "1010994715756",
+  // appId: "1:1010994715756:web:f296ffca4cd0036cf9cc49",
+  // measurementId: "G-1KVGXFE1B8"
+
+  // apiKey: "AIzaSyC7Hi9Ft_K0MmOdbP6tsg5YksP4F6nORHE",
+  // authDomain: "fir-crud-7f287.firebaseapp.com",
+  // databaseURL: "https://fir-crud-7f287.firebaseio.com",
+  // projectId: "fir-crud-7f287",
+  // storageBucket: "fir-crud-7f287.appspot.com",
+  // messagingSenderId: "148921659125"
+
 };
 
-// apiKey: "AIzaSyDLRvuEOocPLvPN1fm28Vz4UNEmDjNBRyw",
-// authDomain: "paguyuban-52264.firebaseapp.com",
-// databaseURL: "https://paguyuban-52264.firebaseio.com",
-// projectId: "paguyuban-52264",
-// storageBucket: "paguyuban-52264.appspot.com",
-// messagingSenderId: "1010994715756",
-// appId: "1:1010994715756:web:f296ffca4cd0036cf9cc49",
-// measurementId: "G-1KVGXFE1B8"
+
 @NgModule({
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA
@@ -63,7 +74,10 @@ export const firebaseConfig = {
     ViewNilaiSiswaPage,
     InfoDetailPage,
     ForgotPasswordPage,
-    ChartPage
+    ChartPage,
+    ListMemberPage,
+    DetailMemberPage,
+    AddMemberPage
   ],
   imports: [
     BrowserModule,
@@ -90,7 +104,10 @@ export const firebaseConfig = {
     ViewNilaiSiswaPage,
     InfoDetailPage,
     ForgotPasswordPage,
-    ChartPage
+    ChartPage,
+    ListMemberPage,
+    DetailMemberPage,
+    AddMemberPage
   ],
   providers: [
     StatusBar,
@@ -98,7 +115,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AlertProvider,
     GuruserviceProvider,
-    SiswaserviceProvider
+    SiswaserviceProvider,
+    PaguyubanServiceProvider
   ]
 })
 export class AppModule {}

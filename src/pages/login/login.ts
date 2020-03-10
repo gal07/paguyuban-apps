@@ -46,88 +46,90 @@ export class LoginPage {
       }
     })
   }
+  
 
   login(){
+    this.navCtrl.push(TabsPage,{data:{role:1}})
+    return false;
+    // if (this.email.length == 0 || this.password.length == 0) {
+    //   this.alertprov.showAlert('Warning','Field email dan password harus di isi','Close')
+    //   return false;
+    // }
 
-    if (this.email.length == 0 || this.password.length == 0) {
-      this.alertprov.showAlert('Warning','Field email dan password harus di isi','Close')
-      return false;
-    }
+    // /* Create Loader */
+    // const loader = this.loadingCtrl.create({
+    //   content: "Please wait...",
+    //   // duration: 4000
+    // });
 
-    /* Create Loader */
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      // duration: 4000
-    });
+    // loader.present();
 
-    loader.present();
+    // /* Check Email apakah email terdapat pada guru_uid */
+    // this.guruservice.check_guru_uid(this.email).subscribe(data=>{
+    //   if (data.length == 1) {
+    //    /* Jika email yang diberikan , ditemukan di dalam database akan dilanjutkan */
+    //    this.afauth.auth.signInWithEmailAndPassword(this.email,this.password).then((res)=>{
+    //     loader.dismiss();
+    //     this.navCtrl.push(TabsPage,{data:{role:1}})
+    //     let roles = 1;
+    //     localStorage.setItem('role',JSON.stringify(roles))
+    //   }).catch(error=>{
+    //     loader.dismiss();
+    //     this.alertprov.showAlert('Failed',error.message,'Close')
+    //   })
+    //   }
+    //   else {
 
-    /* Check Email apakah email terdapat pada guru_uid */
-    this.guruservice.check_guru_uid(this.email).subscribe(data=>{
-      if (data.length == 1) {
-       /* Jika email yang diberikan , ditemukan di dalam database akan dilanjutkan */
-       this.afauth.auth.signInWithEmailAndPassword(this.email,this.password).then((res)=>{
-        loader.dismiss();
-        this.navCtrl.push(TabsPage,{data:{role:1}})
-        let roles = 1;
-        localStorage.setItem('role',JSON.stringify(roles))
-      }).catch(error=>{
-        loader.dismiss();
-        this.alertprov.showAlert('Failed',error.message,'Close')
-      })
-      }
-      else {
+    //     /* Check Email apakah email terdapat pada siswa_uid */
+    //     this.guruservice.check_siswa_uid(this.email).subscribe(data=>{
 
-        /* Check Email apakah email terdapat pada siswa_uid */
-        this.guruservice.check_siswa_uid(this.email).subscribe(data=>{
+    //       if (data.length == 1) {
 
-          if (data.length == 1) {
-
-              /* Jika email yang diberikan , ditemukan di dalam database akan dilanjutkan */
-              this.afauth.auth.signInWithEmailAndPassword(this.email,this.password).then((res)=>{
-                loader.dismiss();
-                this.navCtrl.push(TabsPage,{data:{role:2}})
-                let roles = 2;
-                localStorage.setItem('role',JSON.stringify(roles))
-              }).catch(error=>{
-                loader.dismiss();
-                this.alertprov.showAlert('Failed',error.message,'Close')
-              })
+    //           /* Jika email yang diberikan , ditemukan di dalam database akan dilanjutkan */
+    //           this.afauth.auth.signInWithEmailAndPassword(this.email,this.password).then((res)=>{
+    //             loader.dismiss();
+    //             this.navCtrl.push(TabsPage,{data:{role:2}})
+    //             let roles = 2;
+    //             localStorage.setItem('role',JSON.stringify(roles))
+    //           }).catch(error=>{
+    //             loader.dismiss();
+    //             this.alertprov.showAlert('Failed',error.message,'Close')
+    //           })
             
-          }else{
+    //       }else{
 
-            /* Check Email apakah email terdapat pada orangtua_uid */
-            this.guruservice.check_orangtua_uid(this.email).subscribe(data=>{
+    //         /* Check Email apakah email terdapat pada orangtua_uid */
+    //         this.guruservice.check_orangtua_uid(this.email).subscribe(data=>{
 
-              if (data.length == 1) {
+    //           if (data.length == 1) {
 
-                   /* Jika email yang diberikan , ditemukan di dalam database akan dilanjutkan */
-                  this.afauth.auth.signInWithEmailAndPassword(this.email,this.password).then((res)=>{
-                    loader.dismiss();
-                    this.navCtrl.push(TabsPage,{data:{role:3}})
-                    let roles = 3;
-                    localStorage.setItem('role',JSON.stringify(roles))
-                  }).catch(error=>{
-                    loader.dismiss();
-                    this.alertprov.showAlert('Failed',error.message,'Close')
-                  })
+    //                /* Jika email yang diberikan , ditemukan di dalam database akan dilanjutkan */
+    //               this.afauth.auth.signInWithEmailAndPassword(this.email,this.password).then((res)=>{
+    //                 loader.dismiss();
+    //                 this.navCtrl.push(TabsPage,{data:{role:3}})
+    //                 let roles = 3;
+    //                 localStorage.setItem('role',JSON.stringify(roles))
+    //               }).catch(error=>{
+    //                 loader.dismiss();
+    //                 this.alertprov.showAlert('Failed',error.message,'Close')
+    //               })
                 
-              }else{
+    //           }else{
 
-                  /* Jika email yang diberikan tidak ditemukan */
-                  loader.dismiss();
-                  this.alertprov.showAlert('Failed','Email Tidak Ditemukan','Close')
+    //               /* Jika email yang diberikan tidak ditemukan */
+    //               loader.dismiss();
+    //               this.alertprov.showAlert('Failed','Email Tidak Ditemukan','Close')
 
-              }
+    //           }
 
-            })
+    //         })
 
-          }
+    //       }
 
-        })
+    //     })
 
-      }
-    })
+    //   }
+    // })
 
   }
 
