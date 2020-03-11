@@ -1,10 +1,8 @@
+import { DetailInfoPage } from './../detail-info/detail-info';
+import { EventPaguyubanPage } from './../event-paguyuban/event-paguyuban';
 import { HomePage } from './../home/home';
 import { ListMemberPage } from './../list-member/list-member';
 import { Component } from '@angular/core';
-import { IndexGuruPage } from './../index-guru/index-guru';
-import { IndexOrangtuaPage } from './../index-orangtua/index-orangtua';
-import { IndexSiswaPage } from './../index-siswa/index-siswa';
-import { UsersPage } from './../users/users';
 import { NavParams } from 'ionic-angular';
 @Component({
   templateUrl: 'tabs.html'
@@ -13,6 +11,8 @@ export class TabsPage {
 
   tab1Root;
   tab2Root;
+  tab3Root;
+  tab4Root;
 
   /**
    * Role 1 adalah Guru
@@ -26,6 +26,8 @@ export class TabsPage {
     //if (roles.role == 1) {
     this.tab1Root = HomePage
     this.tab2Root = ListMemberPage
+    this.tab3Root = EventPaguyubanPage
+    this.tab4Root = DetailInfoPage
     /* siswa */
     // }else if(roles.role == 2){
     // this.tab1Root = IndexSiswaPage
