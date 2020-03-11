@@ -1,0 +1,44 @@
+<!--
+  Generated template for the DetailInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img src="https://www.theportlandclinic.com/wp-content/uploads/2019/07/Person-Curtis_4x5-e1564616444404.jpg">
+    <ion-card-content>
+      <ion-card-title>
+        {{ nama }} ({{ role }})
+        </ion-card-title>
+      <p>
+        <ion-icon style="padding:3%" name="compass"></ion-icon>
+        {{ alamat }}
+      </p>
+
+      <p>
+        <ion-icon style="padding:3%" name="mail"></ion-icon>
+        {{ email }}
+      </p>
+
+      <p>
+        <ion-icon *ngIf="kelamin == 'Laki - Laki'"  style="padding:3%" name="man"></ion-icon>
+        <ion-icon *ngIf="kelamin == 'Perempuan'"  style="padding:3%" name="woman"></ion-icon>
+        {{ kelamin }}
+      </p>
+
+      <p>
+        <ion-icon name="call" style="padding:3%"></ion-icon>
+        {{ phone }}
+      </p>
+
+      <button ion-button color="danger" block class="btn_login" (click)="logOut()" > <span class="next"> Logout </span> </button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
