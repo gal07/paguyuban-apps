@@ -20,8 +20,13 @@ export class AddMemberPage {
   /* Property for result */
   resultNewMember:any;
 
+  /* Property For Get Data */
+  resultGetMember:any;
+
+
   /* Data Member */
   datamember = {
+    "active":1,
     "nama":"",
     "email":"",
     "alamat":"",
@@ -30,6 +35,8 @@ export class AddMemberPage {
     "tgl_lahir":"",
     "tgl_bergabung":"",
     "parent":"",
+    "phone":"",
+    "create_by":"",
     "uid":""
   }
 
@@ -43,6 +50,19 @@ export class AddMemberPage {
     ) {
 
 
+  }
+
+  async ionViewWillEnter(){
+   
+    ;(await this.paguyubanservice.GetAllMember()).subscribe(res=>{
+      this.resultGetMember = res
+      console.log(this.resultGetMember)
+    })
+    // this.paguyubanservice.GetAllMember().then((res)=>{
+    //   this.resultGetMember = res
+    // }).catch(e=>{
+    //   this.alertservice.showAlert('Error',e,'Tutup')
+    // })
 
   }
 
@@ -59,6 +79,13 @@ export class AddMemberPage {
     loader.present()
 
     this.paguyubanservice.APIconnectionpost("",this.datamember,1).then(res=>{
+
+      /* Set Create By */
+      let datauser = JSON.parse(localStorage.getItem('data_user'))
+      this.datamember.create_by = datauser[0].email
+
+      /* Set Phone number */
+      this.datamember.phone = "+62"+this.datamember.phone.substring(1)
 
       this.resultNewMember = res // Memberi nilai resultNewMember
       this.datamember.email.toLowerCase() // Ubah ke huruf kecil semua

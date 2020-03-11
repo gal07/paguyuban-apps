@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>add-member</ion-title>
+    <ion-title>Tambah Anggota</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -17,6 +17,11 @@
     <ion-item>
       <ion-label floating>Nama</ion-label>
       <ion-input type="text" [(ngModel)]="datamember.nama"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>No Telp</ion-label>
+      <ion-input type="number" [(ngModel)]="datamember.phone"></ion-input>
     </ion-item>
   
     <ion-item>
@@ -62,17 +67,11 @@
       <ion-label floating>Keluarga Di Paguyuban</ion-label>
       <ion-select [(ngModel)]="datamember.parent">
         <ion-option value="0">Tidak ada</ion-option>
-        <ion-option value="2">Ketua</ion-option>
-        <ion-option value="3">Wakil</ion-option>
-        <ion-option value="4">Sekretaris</ion-option>
-        <ion-option value="5">Humas</ion-option>
-        <ion-option value="6">Anggota</ion-option>
+        <ion-option *ngFor="let item of resultGetMember"  value="{{ item.uid }}"> {{ item.nama }} </ion-option>
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <button (click)="AddMember()"  ion-button full primary>Add New Member</button>
-    </ion-item>
+      <button (click)="AddMember()"  ion-button block primary>Add New Member</button>
   
   </ion-list>
 
