@@ -21,6 +21,7 @@ export class ListMemberPage {
 
   /* Property Get result member */
   resultMember:any;
+  roles:any;
 
   constructor(
     public navCtrl: NavController,
@@ -30,6 +31,9 @@ export class ListMemberPage {
     public loadingCtrl: LoadingController,
     ) {
 
+      /* Get Role */
+      let role = JSON.parse(localStorage.getItem('data_user'))
+      this.roles = role[0].role
     
   }
 
@@ -44,20 +48,26 @@ export class ListMemberPage {
 
   async getMember(){
 
-     /* Create Loader */
-     const loader = this.loadingCtrl.create({
+    /* Create Loader */
+    const loader = this.loadingCtrl.create({
       content: "Sebentar ya, Lagi ambil data",
     });
     loader.present()
 
-    this.paguyubanservice.GetAllMember().then(res => {
+    ;(await this.paguyubanservice.GetAllMember()).subscribe(res=>{
       this.resultMember = res
-      console.log(res);
       loader.dismiss()
-    }).catch(e=>{
-      console.log(e)
-      loader.dismiss()
-    });
+      console.log(this.resultMember)
+    })
+
+    // this.paguyubanservice.GetAllMember().then(res => {
+    //   this.resultMember = res
+    //   console.log(res);
+    //   loader.dismiss()
+    // }).catch(e=>{
+    //   console.log(e)
+    //   loader.dismiss()
+    // });
   }
 
   toDetail(data){
@@ -72,7 +82,8 @@ export class ListMemberPage {
     /**
      * Get Roles Name
      */
-      let arr = {
+      let arr = {        
+        "1":"Administrator",
         "2":"Ketua",
         "3":"Wakil Ketua",
         "4":"Sekretaris",
@@ -82,6 +93,19 @@ export class ListMemberPage {
 
       return arr[val]
 
+  }
+
+  async ChangeStatus(k,value){
+    /* Create Loader */
+    const loader = this.loadingCtrl.create({
+      content: "Sebentar ya, Lagi coba di update",
+    });
+    loader.present()
+    this.paguyubanservice.ChangeStatusActive(k,value).then(()=>{
+      loader.dismiss()
+    }).catch(e=>{
+      loader.dismiss()
+    });
   }
 
 }

@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>list-member</ion-title>
+    <ion-title>Anggota</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,11 +15,11 @@
   <ion-list>
 
     <ion-item-sliding *ngFor="let item of resultMember">
-      <ion-item (click)="toDetail(item)" >
+      <ion-item (click)="toDetail(item)" color="{{ (item.active == 1 ? '':'danger') }}">
         <ion-avatar item-start>
           <img src="https://www.theportlandclinic.com/wp-content/uploads/2019/07/Person-Curtis_4x5-e1564616444404.jpg">
         </ion-avatar>
-        <h2>{{ item.nama }} ( {{ rolesName(item.role) }} )</h2>
+        <h2>{{ item.nama }} ( {{ rolesName(item.role) }} ) <span *ngIf="item.active != 1">Deactived</span> </h2>
         <small>{{ item.alamat }}</small>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
       </ion-item>
       <ion-item-options side="left">
@@ -32,18 +32,25 @@
           Call
         </button>
       </ion-item-options>
-      <ion-item-options side="right">
-        <button ion-button color="primary">
-          <ion-icon name="mail"></ion-icon>
-          Email
+      <ion-item-options *ngIf="roles == 1 || roles == 2 || roles == 3"  side="right">
+
+        <button color="danger" *ngIf="item.active == 1"  ion-button (click)="ChangeStatus(item.key,item.active)">
+          <ion-icon name="power"></ion-icon>
+          Deactive
         </button>
+
+        <button color="secondary" *ngIf="item.active == 0" ion-button (click)="ChangeStatus(item.key,item.active)">
+          <ion-icon name="power"></ion-icon>
+          Active
+        </button>
+
       </ion-item-options>
     </ion-item-sliding>
 
   </ion-list>
 
   <!-- Fab Button -->
-  <ion-fab bottom right>
+  <ion-fab bottom right *ngIf="roles == 1 || roles == 2 || roles == 3" >
     <button ion-fab mini (click)="toAddMember()" ><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
