@@ -1,16 +1,12 @@
-import { SiswaRunning } from './../../model/siswa_running';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpRequest } from '@angular/common/http';
+import { AlertProvider } from './../alert/alert';
 
-import { AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable,Subject } from 'rxjs';
-import { GuruUid } from './../../model/guruuid';
-import { Guru_Running } from './../../model/guru_running';
-import { Guru } from '../../model/guru';
-import { Semester } from './../../model/semester';
 import { map } from 'rxjs/operators';
+import { Anggota } from './../../myreference/anggota';
 
 /*
   Generated class for the PaguyubanServiceProvider provider.
@@ -21,6 +17,10 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class PaguyubanServiceProvider {
 
+  /* Reference */
+  private anggota: AngularFirestoreCollection<Anggota>;
+  items_anggota: Observable<Anggota[]>;
+
   token:any;
   url:any;
 
@@ -29,6 +29,7 @@ export class PaguyubanServiceProvider {
     public httpclient:HttpClient,
     private afs:AngularFirestore,
     public afauth:AngularFireAuth,
+    public alertservice:AlertProvider
     ) {
 
     this.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ._f44eKHjfG197-os_5FZVv28_lN1NwCvS5TdEpoNhcE';
@@ -101,12 +102,67 @@ async CreateNewMember(data){
  */
 async GetAllMember(){
   
+  // return new Promise((resolve, reject) =>{
+  //   this.afs.collection('anggota',ref=>{return ref.where('active','==',1).orderBy('nama')}).snapshotChanges().pipe(
+  //     map(changes => 
+  //       changes.map(c => ({key : c.payload.doc.id }))
+  //     )
+  //   );
+  // });
+
+  this.anggota = this.afs.collection<Anggota>('anggota',ref=>{return ref.orderBy('nama')});
+  this.items_anggota = this.anggota.snapshotChanges().pipe(
+    map(changes=>
+      changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
+      )
+  );
+
+  return this.items_anggota;
+ 
+}
+
+
+/**
+ * Check Email Before Login
+ * 
+ */
+async CheckEmail(email){
+
   return new Promise((resolve, reject) =>{
-    this.afs.collection('anggota').valueChanges().subscribe(res=>{
+    this.afs.collection('anggota',ref=>{ return ref.where('email','==',email).where('active','==',1) }).valueChanges().subscribe(res=>{
       resolve(res)
     })
-  });
- 
+  })
+
+}
+
+
+/***
+ * 
+ * Active & Deactive User
+ */
+async ChangeStatusActive(k,value){
+
+  switch (value) {
+    case 1:
+      this.afs.collection('anggota').doc('/'+k).update({active:0}).then(()=>{
+        this.alertservice.presentToast('User Di Nonaktifkan',3000,'bottom')
+      }).catch(e => {
+        this.alertservice.showAlert('Error',e,'Tutup')
+      })
+      break;
+  
+    case 0:
+      this.afs.collection('anggota').doc('/'+k).update({active:1}).then(()=>{
+        this.alertservice.presentToast('User Di Aktifkan',3000,'bottom')
+      }).catch(e => {
+        this.alertservice.showAlert('Error',e,'Tutup')
+      })
+      break;
+    
+    default:
+      break;
+  }
 
 }
 
