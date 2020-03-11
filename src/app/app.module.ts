@@ -34,6 +34,8 @@ import { ListMemberPage } from './../pages/list-member/list-member';
 import { DetailMemberPage } from './../pages/detail-member/detail-member';
 import { AddMemberPage } from './../pages/add-member/add-member';
 import { PaguyubanServiceProvider } from '../providers/paguyuban-service/paguyuban-service';
+import { DetailInfoPage } from './../pages/detail-info/detail-info';
+import { EventPaguyubanPage } from './../pages/event-paguyuban/event-paguyuban';
 
 export const firebaseConfig = {
 
@@ -77,7 +79,9 @@ export const firebaseConfig = {
     ChartPage,
     ListMemberPage,
     DetailMemberPage,
-    AddMemberPage
+    AddMemberPage,
+    DetailInfoPage,
+    EventPaguyubanPage
   ],
   imports: [
     BrowserModule,
@@ -107,7 +111,9 @@ export const firebaseConfig = {
     ChartPage,
     ListMemberPage,
     DetailMemberPage,
-    AddMemberPage
+    AddMemberPage,
+    DetailInfoPage,
+    EventPaguyubanPage
   ],
   providers: [
     StatusBar,
