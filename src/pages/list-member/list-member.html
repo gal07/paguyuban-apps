@@ -15,7 +15,7 @@
   <ion-list>
 
     <ion-item-sliding *ngFor="let item of resultMember">
-      <ion-item (click)="toDetail(item)" color="{{ (item.active == 1 ? '':'danger') }}">
+      <ion-item (click)="toDetail(item)" color="{{ (item.active == 1 ? '':'danger') }}" *ngIf="item.key != key && item.role != 1">
         <ion-avatar item-start>
           <img src="https://www.theportlandclinic.com/wp-content/uploads/2019/07/Person-Curtis_4x5-e1564616444404.jpg">
         </ion-avatar>
@@ -23,11 +23,11 @@
         <small>{{ item.alamat }}</small>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
       </ion-item>
       <ion-item-options side="left">
-        <button ion-button color="primary">
+        <button ion-button color="primary" (click)="SMS(item.phone,'Hello World')">
           <ion-icon name="text"></ion-icon>
           Text
         </button>
-        <button ion-button color="secondary">
+        <button ion-button color="secondary" (click)="callNumber(item.phone)">
           <ion-icon name="call"></ion-icon>
           Call
         </button>

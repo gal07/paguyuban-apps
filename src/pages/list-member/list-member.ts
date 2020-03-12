@@ -22,6 +22,7 @@ export class ListMemberPage {
   /* Property Get result member */
   resultMember:any;
   roles:any;
+  key:any;
 
   constructor(
     public navCtrl: NavController,
@@ -34,6 +35,7 @@ export class ListMemberPage {
       /* Get Role */
       let role = JSON.parse(localStorage.getItem('data_user'))
       this.roles = role[0].role
+      this.key = role[0].key
     
   }
 
@@ -106,6 +108,14 @@ export class ListMemberPage {
     }).catch(e=>{
       loader.dismiss()
     });
+  }
+
+  async callNumber(number){
+    this.paguyubanservice.CallNumber(number)
+  }
+
+  async SMS(number,message){
+    this.paguyubanservice.SMS(number,message)
   }
 
 }
