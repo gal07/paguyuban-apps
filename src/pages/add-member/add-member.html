@@ -15,17 +15,17 @@
   <ion-list>
 
     <ion-item>
-      <ion-label floating>Nama</ion-label>
+      <ion-label floating>Nama <small>* Wajib Di isi</small></ion-label>
       <ion-input type="text" [(ngModel)]="datamember.nama"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>No Telp</ion-label>
+      <ion-label floating>No Telp <small>* Wajib Di isi</small></ion-label>
       <ion-input type="number" [(ngModel)]="datamember.phone"></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-label floating>Email</ion-label>
+      <ion-label floating>Email <small>* Wajib Di isi</small></ion-label>
       <ion-input type="Email" [(ngModel)]="datamember.email"></ion-input>
     </ion-item>
 
@@ -35,7 +35,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Kelamin</ion-label>
+      <ion-label floating>Kelamin <small>* Wajib Di isi</small></ion-label>
       <ion-select [(ngModel)]="datamember.kelamin">
         <ion-option value="Laki - Laki">Laki - Laki</ion-option>
         <ion-option value="Perempuan">Perempuan</ion-option>
@@ -43,7 +43,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Sebagai</ion-label>
+      <ion-label floating>Jabatan <small>* Wajib Di isi</small></ion-label>
       <ion-select [(ngModel)]="datamember.role">
         <ion-option value="2">Ketua</ion-option>
         <ion-option value="3">Wakil</ion-option>
@@ -54,17 +54,17 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Tanggal Lahir</ion-label>
+      <ion-label floating >Tanggal Lahir <small>* Wajib Di isi</small></ion-label>
       <ion-datetime [(ngModel)]="datamember.tgl_lahir" displayFormat="DD - MM - YYYY" pickerFormat="DD - MM - YYYY"></ion-datetime>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Tanggal Bergabung</ion-label>
+      <ion-label floating>Tanggal Bergabung <small>* Wajib Di isi</small></ion-label>
       <ion-datetime [(ngModel)]="datamember.tgl_bergabung" displayFormat="DD - MM - YYYY" pickerFormat="DD - MM - YYYY"></ion-datetime>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Keluarga Di Paguyuban</ion-label>
+      <ion-label floating>Keluarga Di Paguyuban <small>* Wajib Di isi</small></ion-label>
       <ion-select [(ngModel)]="datamember.parent">
         <ion-option value="0">Tidak ada</ion-option>
         <ion-option *ngFor="let item of resultGetMember"  value="{{ item.uid }}"> {{ item.nama }} </ion-option>

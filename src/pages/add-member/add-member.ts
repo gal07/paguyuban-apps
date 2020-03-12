@@ -72,6 +72,11 @@ export class AddMemberPage {
 
   AddMember(){
 
+    if (this.datamember.nama == "" || this.datamember.email == "" || this.datamember.kelamin == "" || this.datamember.role == 0 || this.datamember.tgl_lahir == "" || this.datamember.tgl_bergabung == "" || this.datamember.parent == "" || this.datamember.phone == "") {
+      this.alertservice.presentToast('Tolong di isi yang ada tanda wajib nya ya',4000,'bottom')
+      return false
+    }
+
     /* Create Loader */
     const loader = this.loadingCtrl.create({
       content: "Lagi dicoba save, Tunggu ya..",
