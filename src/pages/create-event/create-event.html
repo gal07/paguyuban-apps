@@ -1,0 +1,49 @@
+<!--
+  Generated template for the CreateEventPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Buat Acara</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Judul Acara <small>* Wajib Di isi</small></ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.nama_acara"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Tempat Acara <small>* Wajib Di isi</small></ion-label>
+      <!-- <ion-input type="text" [(ngModel)]="formdata.tempat_acara"></ion-input> -->
+      <ion-select [(ngModel)]="formdata.tempat_acara">
+        <ion-option *ngFor="let members of member" value="{{ members.nama }}">{{ members.nama }}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Alamat Acara <small>* Wajib Di isi</small></ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.alamat_acara"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Detail Acara <small>* Wajib Di isi</small></ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.detail_acara"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Tanggal Acara <small>* Wajib Di isi</small></ion-label>
+      <ion-datetime [(ngModel)]="formdata.tgl_acara" displayFormat="DD - MM - YYYY" pickerFormat="DD - MM - YYYY"></ion-datetime>
+    </ion-item>
+  
+  </ion-list>
+
+  <button (click)="createEvent()" ion-button block primary>Buat</button>
+
+</ion-content>
