@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { CallNumber } from '@ionic-native/call-number';
+import { SMS } from '@ionic-native/sms';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -36,6 +38,8 @@ import { AddMemberPage } from './../pages/add-member/add-member';
 import { PaguyubanServiceProvider } from '../providers/paguyuban-service/paguyuban-service';
 import { DetailInfoPage } from './../pages/detail-info/detail-info';
 import { EventPaguyubanPage } from './../pages/event-paguyuban/event-paguyuban';
+import { EditProfilePage } from './../pages/edit-profile/edit-profile';
+import { CreateEventPage } from './../pages/create-event/create-event';
 
 export const firebaseConfig = {
 
@@ -81,7 +85,9 @@ export const firebaseConfig = {
     DetailMemberPage,
     AddMemberPage,
     DetailInfoPage,
-    EventPaguyubanPage
+    EventPaguyubanPage,
+    EditProfilePage,
+    CreateEventPage
   ],
   imports: [
     BrowserModule,
@@ -113,7 +119,9 @@ export const firebaseConfig = {
     DetailMemberPage,
     AddMemberPage,
     DetailInfoPage,
-    EventPaguyubanPage
+    EventPaguyubanPage,
+    EditProfilePage,
+    CreateEventPage
   ],
   providers: [
     StatusBar,
@@ -122,7 +130,9 @@ export const firebaseConfig = {
     AlertProvider,
     GuruserviceProvider,
     SiswaserviceProvider,
-    PaguyubanServiceProvider
+    PaguyubanServiceProvider,
+    CallNumber,
+    SMS
   ]
 })
 export class AppModule {}
