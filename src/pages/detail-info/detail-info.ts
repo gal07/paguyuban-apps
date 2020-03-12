@@ -1,3 +1,4 @@
+import { EditProfilePage } from './../edit-profile/edit-profile';
 import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams ,App} from 'ionic-angular';
@@ -71,6 +72,11 @@ export class DetailInfoPage {
 
       return arr[val]
 
+  }
+
+  async editProfile(){
+    let data = JSON.parse(localStorage.getItem('data_user'))
+    this.navCtrl.push(EditProfilePage,{data:data})
   }
 
 }
