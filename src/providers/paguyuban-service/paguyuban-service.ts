@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AlertProvider } from './../alert/alert';
 
-import { AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore,AngularFirestoreCollection } from '@angular/fire/firestore'; //AngularFirestoreDocument
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable,Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Anggota } from './../../myreference/anggota';
+import { JadwalAcara } from './../../myreference/jadwal-acara';
+import { CallNumber } from '@ionic-native/call-number';
+import { SMS } from '@ionic-native/sms';
+
 
 /*
   Generated class for the PaguyubanServiceProvider provider.
@@ -21,6 +25,9 @@ export class PaguyubanServiceProvider {
   private anggota: AngularFirestoreCollection<Anggota>;
   items_anggota: Observable<Anggota[]>;
 
+  private jadwal: AngularFirestoreCollection<JadwalAcara>;
+  items_jadwal: Observable<JadwalAcara[]>;
+
   token:any;
   url:any;
 
@@ -29,7 +36,10 @@ export class PaguyubanServiceProvider {
     public httpclient:HttpClient,
     private afs:AngularFirestore,
     public afauth:AngularFireAuth,
-    public alertservice:AlertProvider
+    public alertservice:AlertProvider,
+    private callNumber: CallNumber,
+    private sms: SMS
+
     ) {
 
     this.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ._f44eKHjfG197-os_5FZVv28_lN1NwCvS5TdEpoNhcE';
@@ -128,11 +138,20 @@ async GetAllMember(){
  */
 async CheckEmail(email){
 
-  return new Promise((resolve, reject) =>{
-    this.afs.collection('anggota',ref=>{ return ref.where('email','==',email).where('active','==',1) }).valueChanges().subscribe(res=>{
-      resolve(res)
-    })
-  })
+  this.anggota = this.afs.collection<Anggota>('anggota',ref=>{return ref.where('email','==',email).where('active','==',1)});
+  this.items_anggota = this.anggota.snapshotChanges().pipe(
+    map(changes=>
+      changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
+      )
+  );
+
+  return this.items_anggota;
+
+  // return new Promise((resolve, reject) =>{
+  //   this.afs.collection('anggota',ref=>{ return ref.where('email','==',email).where('active','==',1) }).valueChanges().subscribe(res=>{
+  //     resolve(res)
+  //   })
+  // })
 
 }
 
@@ -164,6 +183,84 @@ async ChangeStatusActive(k,value){
       break;
   }
 
+}
+
+
+/**
+ * Call Number Service
+ */
+async CallNumber(number){
+  this.callNumber.callNumber(number,true).then(()=>{
+
+  }).catch(e => {
+    this.alertservice.showAlert('Error',e,'Tutup')
+  })
+}
+
+
+/***
+ * SMS Service
+ */
+async SMS(number,message){
+    this.sms.send(number,message).then(res => {
+      this.alertservice.presentToast('Pesan Terkirim',3000,'bottom')
+    }).catch(e=>{
+      this.alertservice.presentToast(e,3000,'bottom')
+    })
+}
+
+
+/**
+ * Update Profile
+ */
+async UpdateProfile(k,data){
+  this.afs.collection('anggota').doc('/'+k).update(data).then(()=>{
+    this.alertservice.presentToast('Belum berubah ya ? Coba deh logout dulu',3000,'bottom')
+  }).catch(e => {
+    this.alertservice.presentToast(e,3000,'bottom')
+  })
+}
+
+
+/***
+ * Get Jadwal Acara
+ */
+async GetJadwalAcara(){
+
+  this.jadwal = this.afs.collection<JadwalAcara>('jadwal');
+  this.items_jadwal = this.jadwal.snapshotChanges().pipe(
+    map(changes=>
+      changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
+      )
+  );
+
+  return this.items_jadwal;
+
+}
+
+/**
+ * Create Event
+ */
+async CreateEvent(data){
+
+  this.afs.collection('jadwal').add(data).then((res)=>{
+    console.log(res)
+  }).catch(e => {
+    console.log(e)
+  })
+
+}
+
+
+/**
+ * Delete Event
+ */
+async DeleteEvent(k){
+  this.afs.collection('jadwal').doc('/'+k).delete().then((res)=>{
+    console.log(res)
+  }).catch(e => {
+    console.log(e)
+  })
 }
 
 
