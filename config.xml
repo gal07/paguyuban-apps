@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SMK Dharma Karya</name>
-    <description>Sebuah Aplikasi Sistem informasi akademik milik sekolah SMK Dharma Karya</description>
+<widget id="galih.project.paguyuban" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Paguyuban Bersama</name>
+    <description>Sebuah Aplikasi Manajemen Paguyuban</description>
     <author email="galihkur29@gmail.com" href="http://ionicframework.com/">gg07</author>
     <content src="index.html" />
     <access origin="*" />
