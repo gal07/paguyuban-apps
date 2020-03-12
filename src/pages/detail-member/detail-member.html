@@ -32,6 +32,14 @@
     </ion-item>
 
     <ion-item>
+      <label for="">No. Telepon : </label>
+      <h2>{{ dataMember.phone }}</h2>
+      <button ion-button icon-only color="secondary" (click)="Call(dataMember.phone)" >
+        <ion-icon name="call"></ion-icon>
+      </button>
+    </ion-item>
+
+    <ion-item>
         <label >Alamat : </label>
         <p style="white-space: normal;">{{ dataMember.alamat }}</p>
     </ion-item>
@@ -46,6 +54,10 @@
         <h2>{{ dataMember.tgl_bergabung }}</h2>
     </ion-item>
 
+    <ion-item>
+      <label for="">Keluarga : </label>
+      <h2>{{ dataMember.parent }}</h2>
+    </ion-item>
 
 
   </ion-list>

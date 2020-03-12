@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PaguyubanServiceProvider } from './../../providers/paguyuban-service/paguyuban-service';
 
 /**
  * Generated class for the DetailMemberPage page.
@@ -18,7 +19,11 @@ export class DetailMemberPage {
   /* Property Data Member */
   dataMember:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public paguyubanservice: PaguyubanServiceProvider
+    ) {
     this.dataMember = this.navParams.get('data')
   }
 
@@ -40,6 +45,10 @@ export class DetailMemberPage {
 
       return arr[val]
 
+  }
+
+  async Call(number){
+    this.paguyubanservice.CallNumber(number)
   }
 
 }
