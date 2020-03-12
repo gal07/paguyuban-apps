@@ -62,19 +62,19 @@ export class AlertProvider {
     prompt.present();
   }
 
-  showConfirm() {
+  showConfirm(title,message,tcancel,tconfirm) {
     const confirm = this.alertController.create({
-      title: 'Use this lightsaber?',
-      message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
+      title: title,
+      message: message,
       buttons: [
         {
-          text: 'Disagree',
+          text: tcancel,
           handler: () => {
             console.log('Disagree clicked');
           }
         },
         {
-          text: 'Agree',
+          text: tconfirm,
           handler: () => {
             console.log('Agree clicked');
           }
