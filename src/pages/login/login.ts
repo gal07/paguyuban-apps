@@ -62,7 +62,7 @@ export class LoginPage {
   }
   
 
-  login(){
+  async login(){
 
     if (this.email.length == 0 || this.password.length == 0) {
       this.alertprov.showAlert('Warning','Field email dan password harus di isi','Close')
@@ -78,8 +78,7 @@ export class LoginPage {
 
     loader.present();
 
-    this.paguyubanservice.CheckEmail(this.email).then(res=>{
-     
+    (await this.paguyubanservice.CheckEmail(this.email)).subscribe(res=>{
       this.resultCheckEmail = res
       if (this.resultCheckEmail.length == 1) {
 
@@ -97,10 +96,6 @@ export class LoginPage {
         this.alertprov.showAlert('Error Login','Data nya gada di kami nih','Tutup')
         loader.dismiss();
       }
-
-    }).catch(e=>{
-      console.log(e)
-      loader.dismiss();
     })
 
     // // /* Check Email apakah email terdapat pada guru_uid */
