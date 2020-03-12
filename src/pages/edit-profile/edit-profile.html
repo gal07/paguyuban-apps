@@ -1,0 +1,39 @@
+<!--
+  Generated template for the EditProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Nama</ion-label>
+      <ion-input type="text" [(ngModel)]="data.nama"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Alamat</ion-label>
+      <ion-input type="text" [(ngModel)]="data.alamat"></ion-input>
+      <!-- <ion-textarea [(ngModel)]="data.alamat"></ion-textarea> -->
+    </ion-item>
+  
+    <ion-item>
+      <ion-label stacked>No Telp</ion-label>
+      <ion-input type="number" [(ngModel)]="data.phone"></ion-input>
+    </ion-item>
+
+    
+    <button ion-button block primary (click)="editProfile()">Update Profile</button>
+
+  </ion-list>
+  
+
+</ion-content>
