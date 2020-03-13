@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="pallete-blueold">
     <ion-title>Anggota</ion-title>
   </ion-navbar>
 </ion-header>
@@ -23,9 +23,9 @@
         <small>{{ item.alamat }}</small>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
       </ion-item>
       <ion-item-options side="left">
-        <button ion-button color="primary" (click)="SMS(item.phone,'Hello World')">
-          <ion-icon name="text"></ion-icon>
-          Text
+        <button *ngIf="roles == 1 || roles == 2 || roles == 3" ion-button color="primary" (click)="SMS(item.phone,'Hello World')">
+          <ion-icon name="create"></ion-icon>
+          Edit
         </button>
         <button ion-button color="secondary" (click)="callNumber(item.phone)">
           <ion-icon name="call"></ion-icon>
@@ -51,7 +51,7 @@
 
   <!-- Fab Button -->
   <ion-fab bottom right *ngIf="roles == 1 || roles == 2 || roles == 3" >
-    <button ion-fab mini (click)="toAddMember()" ><ion-icon name="add"></ion-icon></button>
+    <button color="pallete-redold" ion-fab mini (click)="toAddMember()" ><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
 </ion-content>
