@@ -23,7 +23,7 @@
         <small>{{ item.alamat }}</small>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
       </ion-item>
       <ion-item-options side="left">
-        <button *ngIf="roles == 1 || roles == 2 || roles == 3" ion-button color="primary" (click)="SMS(item.phone,'Hello World')">
+        <button *ngIf="roles == 1 || roles == 2 || roles == 3" ion-button color="primary" (click)="toEditMember(item)">
           <ion-icon name="create"></ion-icon>
           Edit
         </button>

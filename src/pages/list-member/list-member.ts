@@ -1,3 +1,4 @@
+import { EditMemberPage } from './../edit-member/edit-member';
 import { AddMemberPage } from './../add-member/add-member';
 import { DetailMemberPage } from './../detail-member/detail-member';
 import { Component } from '@angular/core';
@@ -116,6 +117,10 @@ export class ListMemberPage {
 
   async SMS(number,message){
     this.paguyubanservice.SMS(number,message)
+  }
+
+  async toEditMember(){
+    this.navCtrl.push(EditMemberPage)
   }
 
 }
