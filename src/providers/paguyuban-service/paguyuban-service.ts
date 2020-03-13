@@ -263,6 +263,29 @@ async DeleteEvent(k){
   })
 }
 
+/**
+ * 
+ * Get Parent Member
+ */
+async GetParent(parent,uid = null){
+
+  if (parent == 0) {
+    console.log('get parent '+uid);
+    this.anggota = this.afs.collection<Anggota>('anggota',ref=>{return ref.where('parent','==',uid).where('active','==',1)});
+  }else{
+    this.anggota = this.afs.collection<Anggota>('anggota',ref=>{return ref.where('uid','==',parent).where('active','==',1)});
+  }
+
+  this.items_anggota = this.anggota.snapshotChanges().pipe(
+    map(changes=>
+      changes.map(c => ({key: c.payload.doc.id, ...c.payload.doc.data()}))
+      )
+  );
+
+  return this.items_anggota;
+
+}
+
 
 /* ####################################### Untuk Koneksi Firestore ################################################## */
 
