@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
+import { DatePicker } from '@ionic-native/date-picker';
+
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -40,6 +42,7 @@ import { DetailInfoPage } from './../pages/detail-info/detail-info';
 import { EventPaguyubanPage } from './../pages/event-paguyuban/event-paguyuban';
 import { EditProfilePage } from './../pages/edit-profile/edit-profile';
 import { CreateEventPage } from './../pages/create-event/create-event';
+import { EditMemberPage } from './../pages/edit-member/edit-member';
 
 export const firebaseConfig = {
 
@@ -87,7 +90,8 @@ export const firebaseConfig = {
     DetailInfoPage,
     EventPaguyubanPage,
     EditProfilePage,
-    CreateEventPage
+    CreateEventPage,
+    EditMemberPage
   ],
   imports: [
     BrowserModule,
@@ -121,7 +125,8 @@ export const firebaseConfig = {
     DetailInfoPage,
     EventPaguyubanPage,
     EditProfilePage,
-    CreateEventPage
+    CreateEventPage,
+    EditMemberPage
   ],
   providers: [
     StatusBar,
@@ -132,7 +137,8 @@ export const firebaseConfig = {
     SiswaserviceProvider,
     PaguyubanServiceProvider,
     CallNumber,
-    SMS
+    SMS,
+    DatePicker
   ]
 })
 export class AppModule {}

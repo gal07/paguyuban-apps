@@ -30,11 +30,11 @@
     </ion-item>
   
     <ion-item>
-      <span item-start> {{ item.tgl_acara }} </span>
-      <small item-start>(Dibuat oleh : {{item.dibuat_oleh}})</small>
-      <button *ngIf="roles != 6" ion-button icon-start clear item-end color="danger" (click)="Delete(item.key)">
+      <button  *ngIf="roles != 6" ion-button icon-start clear item-start color="danger" (click)="Delete(item.key)">
         <ion-icon name="trash"></ion-icon>
       </button>
+      <small item-end> {{ item.tgl_acara }} </small>
+      <small item-end>(Dibuat oleh : {{item.dibuat_oleh}})</small>
     </ion-item>
   
   </ion-card>
