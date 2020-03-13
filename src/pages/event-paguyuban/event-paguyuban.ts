@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController,AlertController } from 'ionic-angular';
 import { PaguyubanServiceProvider } from './../../providers/paguyuban-service/paguyuban-service';
 import { CreateEventPage } from './../create-event/create-event';
 import { AlertProvider } from './../../providers/alert/alert';
@@ -20,14 +20,18 @@ export class EventPaguyubanPage {
 
   /* Result Get Jadwal */
   resultJadwal:any;
+  roles:any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public paguyubanservice: PaguyubanServiceProvider,
     public loadingCtrl: LoadingController,
-    public alertservice: AlertProvider
+    public alertservice: AlertProvider,
+    public alertCtrl:AlertController
     ) {
+      let userdata = JSON.parse(localStorage.getItem('data_user'))
+      this.roles = userdata[0].role
   }
 
   ionViewDidLoad() {
@@ -61,13 +65,35 @@ export class EventPaguyubanPage {
 
   async Delete(k){
 
-    this.paguyubanservice.DeleteEvent(k).then(res=>{
-      this.alertservice.presentToast('Acara Telah Terhapus',3000,'bottom')
-    }).catch(e => {
-      this.alertservice.presentToast(e,3000,'bottom')
-    })
+    const confirm = this.alertCtrl.create({
+      title: 'Hapus Data Acara',
+      message: 'Bener mau di hapus nih ?',
+      buttons: [
+        {
+          text: 'Batal',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Hapus',
+          handler: () => {
+            this.paguyubanservice.DeleteEvent(k).then(res=>{
+              this.alertservice.presentToast('Acara Telah Terhapus',3000,'bottom')
+            }).catch(e => {
+              this.alertservice.presentToast(e,3000,'bottom')
+            })
+            console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+
+
 
   }
+
 
 
 }
