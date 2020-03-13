@@ -18,6 +18,7 @@ export class DetailMemberPage {
 
   /* Property Data Member */
   dataMember:any;
+  parent:any;
 
   constructor(
     public navCtrl: NavController,
@@ -25,6 +26,7 @@ export class DetailMemberPage {
     public paguyubanservice: PaguyubanServiceProvider
     ) {
     this.dataMember = this.navParams.get('data')
+    this.GetParent(this.dataMember.parent,this.dataMember.uid)
   }
 
   ionViewDidLoad() {
@@ -49,6 +51,26 @@ export class DetailMemberPage {
 
   async Call(number){
     this.paguyubanservice.CallNumber(number)
+  }
+
+  async GetParent(parent,uid){
+    console.log('uid : '+uid)
+    console.log('parent : '+parent)
+    if (parent == 0) {
+      console.log('ini parent');
+      (await this.paguyubanservice.GetParent(parent,uid)).subscribe(res=>{
+        this.parent = res
+      })
+    }else{
+      console.log('ini bukan parent');
+      (await this.paguyubanservice.GetParent(parent)).subscribe(res => {
+       this.parent = res
+      })
+    }
+  }
+
+ async toDetail(data){
+    this.navCtrl.push(DetailMemberPage,{data:data});
   }
 
 }
